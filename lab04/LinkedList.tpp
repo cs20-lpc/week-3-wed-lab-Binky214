@@ -1,6 +1,5 @@
 template <typename T>
-LinkedList<T>::LinkedList()
-: head(nullptr) { }
+LinkedList<T>::LinkedList() : head(nullptr) { }
 
 template <typename T>
 LinkedList<T>::~LinkedList() {
@@ -9,17 +8,56 @@ LinkedList<T>::~LinkedList() {
 
 template <typename T>
 void LinkedList<T>::append(const T& elem) {
-    // TODO
+    typename LinkedList<T>::Node* newNode =
+        new typename LinkedList<T>::Node{elem, nullptr};
+
+
+    if (head == nullptr) {
+        head = newNode;
+
+    }
+    else {
+        typename LinkedList<T>::Node* curr = head;
+        while (curr->next != nullptr) {
+            curr = curr->next;
+
+
+        }
+        curr->next = newNode;
+
+    }
+
+    ++this->length;
 }
 
 template <typename T>
 void LinkedList<T>::clear() {
-    // TODO
+    typename LinkedList<T>::Node* curr = head;
+
+    while (curr!= nullptr) {
+        typename LinkedList<T>::Node* next = curr->next;
+        delete curr;
+        curr = next;
+
+
+    }
+    head = nullptr;
+    this->length = 0;
 }
 
 template <typename T>
 T LinkedList<T>::getElement(int position) const {
-    // TODO
+    if (position < 0 || position >= this->length) {
+        throw out_of_range("Position not available");
+    }
+
+    typename LinkedList<T>::Node* curr = head;
+
+    for (int i = 0; i< position; i++) {
+        curr = curr->next;
+    }
+
+    return curr-> value;
 }
 
 template <typename T>
@@ -34,7 +72,17 @@ bool LinkedList<T>::isEmpty() const {
 
 template <typename T>
 void LinkedList<T>::replace(int position, const T& elem) {
-    // TODO
+    if (position < 0 || position >= length) {
+        throw out_of_range("Position not available");
+    }
+
+    typename LinkedList<T>::Node* curr = head;
+
+    for (int i = 0; i< position; i++) {
+        curr = curr->next;
+    }
+
+    curr -> value;
 }
 
 template <typename T>
